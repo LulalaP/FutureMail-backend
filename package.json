@@ -1,7 +1,6 @@
 {
   "name": "how-why-how-why-backend",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "node ./src/index.js",
@@ -68,5 +67,14 @@
     "uuid": "^8.3.1",
     "winston": "^3.3.3",
     "yup": "^0.30.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lulalap/how-why-how-why-backend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lulalap/how-why-how-why-backend/issues"
+  },
+  "homepage": "https://github.com/lulalap/how-why-how-why-backend#readme",
+  "description": ""
 }
