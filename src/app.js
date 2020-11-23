@@ -51,6 +51,7 @@ const createApolloErrorFormatter = (logger) => {
   };
 };
 
+// eslint-disable-next-line object-curly-newline
 export default ({ logStream, context, schema, config } = {}) => {
   const app = new Koa();
 
