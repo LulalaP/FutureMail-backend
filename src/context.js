@@ -4,6 +4,7 @@ import { knexSnakeCaseMappers } from 'objection';
 
 import createLogger from './utils/logger';
 import createGithubClient from './utils/githubClient';
+// eslint-disable-next-line import/no-named-as-default
 import bindModels from './models';
 
 const createContext = ({ config }) => {

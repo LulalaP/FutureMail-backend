@@ -8,6 +8,7 @@ import Router from 'koa-router';
 
 import { ApplicationError, NotFoundError } from './errors';
 import createAuthService from './utils/authService';
+// eslint-disable-next-line import/no-named-as-default
 import createDataLoaders from './utils/dataLoaders';
 import api from './api';
 
@@ -15,6 +16,7 @@ const errorHandler = () => async (ctx, next) => {
   try {
     await next();
   } catch (e) {
+    // eslint-disable-next-line operator-linebreak
     const normalizedError =
       e instanceof ApplicationError
         ? e
@@ -27,8 +29,8 @@ const errorHandler = () => async (ctx, next) => {
   }
 };
 
-const createApolloErrorFormatter = logger => {
-  return error => {
+const createApolloErrorFormatter = (logger) => {
+  return (error) => {
     logger.error(error);
 
     const { originalError } = error;
@@ -99,7 +101,7 @@ export default ({ logStream, context, schema, config } = {}) => {
 
   apolloServer.applyMiddleware({ app });
 
-  app.use(ctx => {
+  app.use((ctx) => {
     throw new NotFoundError(`The path "${ctx.request.path}" is not found`);
   });
 

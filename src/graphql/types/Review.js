@@ -7,6 +7,7 @@ export const typeDefs = gql`
     repository: Repository!
     userId: String!
     repositoryId: String!
+    articleId: String
     rating: Int!
     createdAt: DateTime!
     text: String

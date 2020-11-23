@@ -1,5 +1,6 @@
-exports.up = function(knex) {
-  return knex.schema.createTable('users', table => {
+/* eslint-disable func-names */
+exports.up = function (knex) {
+  return knex.schema.createTable('users', (table) => {
     table.text('id').primary();
     table.text('username').unique();
     table.text('password');
@@ -10,6 +11,6 @@ exports.up = function(knex) {
   });
 };
 
-exports.down = function(knex) {
+exports.down = function (knex) {
   return knex.schema.dropTableIfExists('users');
 };

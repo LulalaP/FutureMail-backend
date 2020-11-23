@@ -1,13 +1,14 @@
+/* eslint-disable max-classes-per-file */
 import LRUCache from 'lru-cache';
 import { ApolloError } from 'apollo-server';
 import { pick, get } from 'lodash';
 
 const oneHour = 1000 * 60 * 60;
 
+// eslint-disable-next-line symbol-description
 const HTTP_CLIENT_ERROR = Symbol();
 
-const isNotFoundError = error =>
-  get(error[HTTP_CLIENT_ERROR], 'response.status') === 404;
+const isNotFoundError = (error) => get(error[HTTP_CLIENT_ERROR], 'response.status') === 404;
 
 class GithubError extends ApolloError {
   constructor(message, properties) {
@@ -44,6 +45,7 @@ export class GithubRepositoryNotFoundError extends ApolloError {
 }
 
 class GithubClient {
+  // eslint-disable-next-line object-curly-newline
   constructor({ httpClient, cacheMaxAge = oneHour, clientId, clientSecret }) {
     this.clientId = clientId;
     this.clientSecret = clientSecret;
@@ -54,9 +56,9 @@ class GithubClient {
   getAuth() {
     return this.clientId && this.clientSecret
       ? {
-          username: this.clientId,
-          password: this.clientSecret,
-        }
+        username: this.clientId,
+        password: this.clientSecret,
+      }
       : undefined;
   }
 
@@ -115,6 +117,6 @@ class GithubClient {
   }
 }
 
-const createGithubClient = options => new GithubClient(options);
+const createGithubClient = (options) => new GithubClient(options);
 
 export default createGithubClient;

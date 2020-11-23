@@ -25,7 +25,7 @@ const getNormalizedRepository = (
   ownerAvatarUrl: get(githubRepository, 'owner.avatar_url') || null,
 });
 
-router.get('/', async ctx => {
+router.get('/', async (ctx) => {
   const {
     models: { Repository },
     githubClient,
@@ -36,11 +36,11 @@ router.get('/', async ctx => {
     orderColumn: 'createdAt',
   });
 
-  const repositoryIds = data.edges.map(edge => edge.node.id);
+  const repositoryIds = data.edges.map((edge) => edge.node.id);
 
   const [githubRepositories, reviewCounts, ratingAverages] = await Promise.all([
     Promise.all(
-      data.edges.map(edge =>
+      data.edges.map((edge) =>
         githubClient.getRepository(edge.node.ownerName, edge.node.name),
       ),
     ),

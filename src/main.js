@@ -10,7 +10,7 @@ const context = createContext({ config });
 const schema = createSchema();
 const { logger } = context;
 
-const logStream = through(chunk => {
+const logStream = through((chunk) => {
   logger.info(chunk.toString());
 });
 

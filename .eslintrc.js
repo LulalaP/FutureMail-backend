@@ -25,6 +25,11 @@ module.exports = {
     'react/prop-types': 'off',
     semi: 'error',
     'linebreak-style': 0,
+    'arrow-body-style': 0,
+    'object-curly-newline': 0,
+    'implicit-arrow-linebreak': 0,
+    'operator-linebreak': 0,
+    'function-paren-newline': 0,
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
   },
 };

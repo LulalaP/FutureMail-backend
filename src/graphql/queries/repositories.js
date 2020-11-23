@@ -43,7 +43,7 @@ const orderColumnByOrderBy = {
   RATING_AVERAGE: 'ratingAverage',
 };
 
-const getLikeFilter = value => `%${value}%`;
+const getLikeFilter = (value) => `%${value}%`;
 
 export const resolvers = {
   Query: {

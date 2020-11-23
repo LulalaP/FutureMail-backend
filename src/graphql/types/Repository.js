@@ -36,7 +36,7 @@ const reviewsArgsSchema = yup.object({
     .default(30),
 });
 
-const makeGithubRepositoryResolver = getValue => async (
+const makeGithubRepositoryResolver = (getValue) => async (
   { ownerName, name },
   args,
   { githubClient },
@@ -87,28 +87,28 @@ export const resolvers = {
         : null;
     },
     fullName: ({ ownerName, name }) => [ownerName, name].join('/'),
-    ownerAvatarUrl: makeGithubRepositoryResolver(repository =>
+    ownerAvatarUrl: makeGithubRepositoryResolver((repository) =>
       get(repository, 'owner.avatar_url'),
     ),
-    description: makeGithubRepositoryResolver(repository =>
+    description: makeGithubRepositoryResolver((repository) =>
       get(repository, 'description'),
     ),
     stargazersCount: makeGithubRepositoryResolver(
-      repository => get(repository, 'stargazers_count') || 0,
+      (repository) => get(repository, 'stargazers_count') || 0,
     ),
     watchersCount: makeGithubRepositoryResolver(
-      repository => get(repository, 'watchers_count') || 0,
+      (repository) => get(repository, 'watchers_count') || 0,
     ),
     forksCount: makeGithubRepositoryResolver(
-      repository => get(repository, 'forks_count') || 0,
+      (repository) => get(repository, 'forks_count') || 0,
     ),
     openIssuesCount: makeGithubRepositoryResolver(
-      repository => get(repository, 'open_issues_count') || 0,
+      (repository) => get(repository, 'open_issues_count') || 0,
     ),
-    url: makeGithubRepositoryResolver(repository =>
+    url: makeGithubRepositoryResolver((repository) =>
       get(repository, 'html_url'),
     ),
-    language: makeGithubRepositoryResolver(repository =>
+    language: makeGithubRepositoryResolver((repository) =>
       get(repository, 'language'),
     ),
   },

@@ -1,9 +1,9 @@
+/* eslint-disable no-shadow */
 import { get, last, first } from 'lodash';
 
-const serializeCursor = data =>
-  Buffer.from(JSON.stringify(data)).toString('base64');
+const serializeCursor = (data) => Buffer.from(JSON.stringify(data)).toString('base64');
 
-const parseCursor = cursor => {
+const parseCursor = (cursor) => {
   try {
     return JSON.parse(Buffer.from(cursor, 'base64').toString('ascii'));
   } catch {
@@ -11,7 +11,7 @@ const parseCursor = cursor => {
   }
 };
 
-const getComparator = orderDirection => (orderDirection === 'asc' ? '>' : '<');
+const getComparator = (orderDirection) => (orderDirection === 'asc' ? '>' : '<');
 
 const createPaginationQuery = async (getQuery, options = {}) => {
   const {
@@ -29,16 +29,14 @@ const createPaginationQuery = async (getQuery, options = {}) => {
   if (parsedCursor) {
     const [idValue, orderColumnValue] = parsedCursor;
 
-    paginatedQuery = paginatedQuery.andWhere(qb => {
+    paginatedQuery = paginatedQuery.andWhere((qb) => {
       qb.where(
         orderColumn,
         getComparator(orderDirection),
         orderColumnValue,
-      ).orWhere(qb =>
-        qb
-          .where(orderColumn, '=', orderColumnValue)
-          .andWhere(idColumn, getComparator(orderDirection), idValue),
-      );
+      ).orWhere((qb) => qb
+        .where(orderColumn, '=', orderColumnValue)
+        .andWhere(idColumn, getComparator(orderDirection), idValue));
     });
   }
 
@@ -54,14 +52,14 @@ const createPaginationQuery = async (getQuery, options = {}) => {
     paginatedQuery,
   ]);
 
-  const edges = data.slice(0, firstCount).map(d => ({
+  const edges = data.slice(0, firstCount).map((d) => ({
     node: d,
     cursor: serializeCursor([d[idColumn], d[orderColumn]]),
   }));
 
   return {
     pageInfo: {
-      totalCount: totalCount[0]['count'],
+      totalCount: totalCount[0].count,
       hasNextPage: data.length > firstCount,
       endCursor: get(last(edges), 'cursor'),
       startCursor: get(first(edges), 'cursor'),

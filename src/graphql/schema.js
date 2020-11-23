@@ -1,8 +1,12 @@
+/* eslint-disable import/no-named-as-default-member */
 import { makeExecutableSchema, gql } from 'apollo-server';
 import { merge } from 'lodash';
 
 import Repository from './types/Repository';
 import repositoryQuery from './queries/repository';
+import Article from './types/Article';
+import articleQuery from './queries/article';
+import createArticleMutation from './mutations/createArticle';
 import User from './types/User';
 import createUserMutation from './mutations/createUser';
 import authorizeMutation from './mutations/authorize';
@@ -34,6 +38,9 @@ const typeDefs = [
   DateTime.typeDefs,
   Repository.typeDefs,
   repositoryQuery.typeDefs,
+  Article.typeDefs,
+  articleQuery.typeDefs,
+  createArticleMutation.typeDefs,
   User.typeDefs,
   createUserMutation.typeDefs,
   authorizeMutation.typeDefs,
@@ -54,6 +61,9 @@ const resolvers = merge(
   DateTime.resolvers,
   Repository.resolvers,
   repositoryQuery.resolvers,
+  Article.resolvers,
+  articleQuery.resolvers,
+  createArticleMutation.resolvers,
   User.resolvers,
   createUserMutation.resolvers,
   authorizeMutation.resolvers,
