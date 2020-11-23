@@ -13,8 +13,10 @@ import authorizeMutation from './mutations/authorize';
 import usersQuery from './queries/users';
 import authorizedUserQuery from './queries/authorizedUser';
 import repositoriesQuery from './queries/repositories';
+import articlesQuery from './queries/articles';
 import PageInfo from './types/PageInfo';
 import RepositoryConnection from './types/RepositoryConnection';
+import ArticleConnection from './types/ArticleConnection';
 import OrderDirection from './enums/OrderDirection';
 import createReviewMutation from './mutations/createReview';
 import Review from './types/Review';
@@ -47,8 +49,10 @@ const typeDefs = [
   usersQuery.typeDefs,
   authorizedUserQuery.typeDefs,
   repositoriesQuery.typeDefs,
+  articlesQuery.typeDefs,
   PageInfo.typeDefs,
   RepositoryConnection.typeDefs,
+  ArticleConnection.typeDefs,
   OrderDirection.typeDefs,
   createReviewMutation.typeDefs,
   Review.typeDefs,
@@ -70,8 +74,10 @@ const resolvers = merge(
   usersQuery.resolvers,
   authorizedUserQuery.resolvers,
   repositoriesQuery.resolvers,
+  articlesQuery.resolvers,
   PageInfo.resolvers,
   RepositoryConnection.resolvers,
+  ArticleConnection.resolvers,
   OrderDirection.resolvers,
   createReviewMutation.resolvers,
   Review.resolvers,

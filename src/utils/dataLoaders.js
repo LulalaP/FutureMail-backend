@@ -30,36 +30,6 @@ const createModelLoader = (Model) =>
     },
   );
 
-const createRepositoryRatingAverageLoader = (Review) =>
-  new DataLoader(async (repositoryIds) => {
-    const reviews = await Review.query()
-      .whereIn('repositoryId', repositoryIds)
-      .avg('rating', { as: 'ratingAverage' })
-      .groupBy('repositoryId')
-      .select('repositoryId');
-
-    return repositoryIds.map((id) => {
-      const review = reviews.find(({ repositoryId }) => repositoryId === id);
-
-      return review ? review.ratingAverage : 0;
-    });
-  });
-
-const createRepositoryReviewCountLoader = (Review) =>
-  new DataLoader(async (repositoryIds) => {
-    const reviews = await Review.query()
-      .whereIn('repositoryId', repositoryIds)
-      .count('*', { as: 'reviewsCount' })
-      .groupBy('repositoryId')
-      .select('repositoryId');
-
-    return repositoryIds.map((id) => {
-      const review = reviews.find(({ repositoryId }) => repositoryId === id);
-
-      return review ? review.reviewsCount : 0;
-    });
-  });
-
 const createArticleReviewCountLoader = (Review) =>
   new DataLoader(async (articleIds) => {
     const reviews = await Review.query()
@@ -74,30 +44,6 @@ const createArticleReviewCountLoader = (Review) =>
       return review ? review.reviewsCount : 0;
     });
   });
-
-const createUserRepositoryReviewExistsLoader = (Review) =>
-  new DataLoader(
-    async (userIdRepositoryIdTuples) => {
-      const userIds = userIdRepositoryIdTuples.map(([userId]) => userId);
-      const repositoryIds = userIdRepositoryIdTuples.map(
-        ([, repositoryId]) => repositoryId,
-      );
-
-      const reviews = await Review.query()
-        .whereIn('repositoryId', repositoryIds)
-        .andWhere((qb) => qb.whereIn('userId', userIds))
-        .select('repositoryId', 'userId');
-
-      return userIdRepositoryIdTuples.map(([userId, repositoryId]) => {
-        return !!reviews.find(
-          (r) => r.userId === userId && r.repositoryId === repositoryId,
-        );
-      });
-    },
-    {
-      cacheKeyFn: jsonCacheKeyFn,
-    },
-  );
 
 const createUserReviewCountLoader = (Review) =>
   new DataLoader(async (userIds) => {
@@ -121,15 +67,6 @@ export const createDataLoaders = ({ models }) => {
     userLoader: createModelLoader(models.User),
     reviewLoader: createModelLoader(models.Review),
     articleReviewCountLoader: createArticleReviewCountLoader(
-      models.Review,
-    ),
-    repositoryRatingAverageLoader: createRepositoryRatingAverageLoader(
-      models.Review,
-    ),
-    repositoryReviewCountLoader: createRepositoryReviewCountLoader(
-      models.Review,
-    ),
-    userRepositoryReviewExistsLoader: createUserRepositoryReviewExistsLoader(
       models.Review,
     ),
     userReviewCountLoader: createUserReviewCountLoader(models.Review),
