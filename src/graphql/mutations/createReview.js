@@ -1,14 +1,12 @@
-import { gql, ApolloError } from 'apollo-server';
+import { gql } from 'apollo-server';
 import * as yup from 'yup';
 
-import { GithubRepositoryNotFoundError } from '../../utils/githubClient';
+const { v4: uuid } = require('uuid');
 
 export const typeDefs = gql`
   input CreateReviewInput {
-    repositoryName: String!
-    ownerName: String!
-    rating: Int!
-    text: String
+    articleId: String!
+    text: String!
   }
 
   extend type Mutation {
@@ -19,31 +17,11 @@ export const typeDefs = gql`
   }
 `;
 
-class RepositoryAlreadyReviewedError extends ApolloError {
-  constructor(message = 'User has already reviewed this repository') {
-    super(message, 'REPOSITORY_ALREADY_REVIEWED');
-  }
-}
-
-const createRepositoryId = (ownerUsername, repositoryName) => [ownerUsername, repositoryName].join('.');
-
 const createReviewInputSchema = yup.object().shape({
-  repositoryName: yup
+  articleId: yup
     .string()
     .required()
-    .lowercase()
     .trim(),
-  ownerName: yup
-    .string()
-    .required()
-    .lowercase()
-    .trim(),
-  rating: yup
-    .number()
-    .integer()
-    .min(0)
-    .max(100)
-    .required(),
   text: yup
     .string()
     .max(2000)
@@ -55,7 +33,7 @@ export const resolvers = {
     createReview: async (
       obj,
       args,
-      { models: { Repository, Review }, githubClient, authService },
+      { models: { Review }, authService },
     ) => {
       const userId = authService.assertIsAuthorized();
 
@@ -66,51 +44,13 @@ export const resolvers = {
         },
       );
 
-      const { repositoryName, ownerName } = normalizedReview;
-
-      const existingRepository = await Repository.query().findOne({
-        name: repositoryName,
-        ownerName,
-      });
-
-      const repositoryId = existingRepository
-        ? existingRepository.id
-        : createRepositoryId(ownerName, repositoryName);
-
-      if (!existingRepository) {
-        const githubRepository = await githubClient.getRepository(
-          ownerName,
-          repositoryName,
-        );
-
-        if (!githubRepository) {
-          throw GithubRepositoryNotFoundError.fromNames(
-            ownerName,
-            repositoryName,
-          );
-        }
-
-        await Repository.query().insert({
-          id: repositoryId,
-          ownerName,
-          name: repositoryName,
-        });
-      }
-
-      const id = [userId, repositoryId].join('.');
-
-      const existringReview = await Review.query().findById(id);
-
-      if (existringReview) {
-        throw new RepositoryAlreadyReviewedError();
-      }
+      const id = uuid();
 
       await Review.query().insert({
         id,
         userId,
-        repositoryId,
+        articleId: normalizedReview.articleId,
         text: normalizedReview.text,
-        rating: normalizedReview.rating,
       });
 
       return Review.query().findById(id);

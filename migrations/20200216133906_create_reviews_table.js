@@ -7,15 +7,14 @@ exports.up = function (knex) {
       .references('users.id')
       .onDelete('cascade');
     table
-      .text('repository_id')
-      .references('repositories.id')
+      .text('article_id')
+      .references('articles.id')
       .onDelete('cascade');
-    table.integer('rating');
     table.text('text');
     table.timestamp('created_at');
     table.timestamp('updated_at');
 
-    table.index(['user_id', 'repository_id']);
+    table.index(['user_id', 'article_id']);
   });
 };
 
