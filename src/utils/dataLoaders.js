@@ -62,7 +62,6 @@ const createUserReviewCountLoader = (Review) =>
 
 export const createDataLoaders = ({ models }) => {
   return {
-    repositoryLoader: createModelLoader(models.Repository),
     articleLoader: createModelLoader(models.Article),
     userLoader: createModelLoader(models.User),
     reviewLoader: createModelLoader(models.Review),

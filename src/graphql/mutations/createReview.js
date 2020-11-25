@@ -11,7 +11,7 @@ export const typeDefs = gql`
 
   extend type Mutation {
     """
-    Creates a review for the given repository defined by repositoryName and ownerName.
+    Creates a review for the article.
     """
     createReview(review: CreateReviewInput): Review
   }
