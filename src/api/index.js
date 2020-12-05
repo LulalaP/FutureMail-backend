@@ -1,9 +1,9 @@
 import Router from 'koa-router';
 
-import articles from './articles';
+import letters from './letters';
 
 const router = new Router();
 
-router.use('/articles', articles.routes());
+router.use('/letters', letters.routes());
 
 export default router;

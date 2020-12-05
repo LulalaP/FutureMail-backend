@@ -5,20 +5,20 @@ const { v4: uuid } = require('uuid');
 
 export const typeDefs = gql`
   input CreateReviewInput {
-    articleId: String!
+    letterId: String!
     text: String!
   }
 
   extend type Mutation {
     """
-    Creates a review for the article.
+    Creates a review for the letter.
     """
     createReview(review: CreateReviewInput): Review
   }
 `;
 
 const createReviewInputSchema = yup.object().shape({
-  articleId: yup
+  letterId: yup
     .string()
     .required()
     .trim(),
@@ -49,7 +49,7 @@ export const resolvers = {
       await Review.query().insert({
         id,
         userId,
-        articleId: normalizedReview.articleId,
+        letterId: normalizedReview.letterId,
         text: normalizedReview.text,
       });
 

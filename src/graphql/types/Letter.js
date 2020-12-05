@@ -4,7 +4,7 @@ import * as yup from 'yup';
 import createPaginationQuery from '../../utils/createPaginationQuery';
 
 export const typeDefs = gql`
-  type Article {
+  type Letter {
     id: ID!
     title: String!
     titleEn: String!
@@ -31,7 +31,7 @@ const reviewsArgsSchema = yup.object({
 });
 
 export const resolvers = {
-  Article: {
+  Letter: {
     user: ({ userId }, args, { dataLoaders: { userLoader } }) => {
       return userLoader.load(userId);
     },
@@ -41,7 +41,7 @@ export const resolvers = {
       return createPaginationQuery(
         () =>
           Review.query().where({
-            articleId: obj.id,
+            letterId: obj.id,
           }),
         {
           orderColumn: 'createdAt',
@@ -54,8 +54,8 @@ export const resolvers = {
     reviewCount: (
       { id },
       args,
-      { dataLoaders: { articleReviewCountLoader } },
-    ) => articleReviewCountLoader.load(id),
+      { dataLoaders: { letterReviewCountLoader } },
+    ) => letterReviewCountLoader.load(id),
   },
 };
 

@@ -30,16 +30,16 @@ const createModelLoader = (Model) =>
     },
   );
 
-const createArticleReviewCountLoader = (Review) =>
-  new DataLoader(async (articleIds) => {
+const createLetterReviewCountLoader = (Review) =>
+  new DataLoader(async (letterIds) => {
     const reviews = await Review.query()
-      .whereIn('articleId', articleIds)
+      .whereIn('letterId', letterIds)
       .count('*', { as: 'reviewsCount' })
-      .groupBy('articleId')
-      .select('articleId');
+      .groupBy('letterId')
+      .select('letterId');
 
-    return articleIds.map((id) => {
-      const review = reviews.find(({ articleId }) => articleId === id);
+    return letterIds.map((id) => {
+      const review = reviews.find(({ letterId }) => letterId === id);
 
       return review ? review.reviewsCount : 0;
     });
@@ -62,10 +62,10 @@ const createUserReviewCountLoader = (Review) =>
 
 export const createDataLoaders = ({ models }) => {
   return {
-    articleLoader: createModelLoader(models.Article),
+    letterLoader: createModelLoader(models.Letter),
     userLoader: createModelLoader(models.User),
     reviewLoader: createModelLoader(models.Review),
-    articleReviewCountLoader: createArticleReviewCountLoader(
+    letterReviewCountLoader: createLetterReviewCountLoader(
       models.Review,
     ),
     userReviewCountLoader: createUserReviewCountLoader(models.Review),

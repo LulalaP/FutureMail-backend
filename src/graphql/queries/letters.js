@@ -4,26 +4,26 @@ import * as yup from 'yup';
 import createPaginationQuery from '../../utils/createPaginationQuery';
 
 export const typeDefs = gql`
-  enum AllArticlesOrderBy {
+  enum AllLettersOrderBy {
     CREATED_AT
   }
 
   extend type Query {
     """
-    Returns paginated articles.
+    Returns paginated letters.
     """
-    articles(
+    letters(
       after: String
       first: Int
       orderDirection: OrderDirection
-      orderBy: AllArticlesOrderBy
+      orderBy: AllLettersOrderBy
       searchKeyword: String
       userId: String
-    ): ArticleConnection!
+    ): LetterConnection!
   }
 `;
 
-const articlesArgsSchema = yup.object({
+const lettersArgsSchema = yup.object({
   after: yup.string(),
   first: yup
     .number()
@@ -44,8 +44,8 @@ const getLikeFilter = (value) => `%${value}%`;
 
 export const resolvers = {
   Query: {
-    articles: async (obj, args, { models: { Article } }) => {
-      const normalizedArgs = await articlesArgsSchema.validate(args);
+    letters: async (obj, args, { models: { Letter } }) => {
+      const normalizedArgs = await lettersArgsSchema.validate(args);
 
       const {
         first,
@@ -58,7 +58,7 @@ export const resolvers = {
 
       const orderColumn = orderColumnByOrderBy[orderBy];
 
-      let query = Article.query();
+      let query = Letter.query();
 
       if (userId) {
         query = query.where({

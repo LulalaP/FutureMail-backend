@@ -3,16 +3,16 @@ import { gql } from 'apollo-server';
 export const typeDefs = gql`
   extend type Query {
     """
-    Returns article by an id.
+    Returns letter by an id.
     """
-    article(id: ID!): Article
+    letter(id: ID!): Letter
   }
 `;
 
 export const resolvers = {
   Query: {
-    article: async (obj, args, { dataLoaders: { articleLoader } }) =>
-      articleLoader.load(args.id),
+    letter: async (obj, args, { dataLoaders: { letterLoader } }) =>
+      letterLoader.load(args.id),
   },
 };
 

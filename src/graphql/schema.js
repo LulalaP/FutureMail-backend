@@ -2,17 +2,17 @@
 import { makeExecutableSchema, gql } from 'apollo-server';
 import { merge } from 'lodash';
 
-import Article from './types/Article';
-import articleQuery from './queries/article';
-import createArticleMutation from './mutations/createArticle';
+import Letter from './types/Letter';
+import letterQuery from './queries/letter';
+import createLetterMutation from './mutations/createLetter';
 import User from './types/User';
 import createUserMutation from './mutations/createUser';
 import authorizeMutation from './mutations/authorize';
 import usersQuery from './queries/users';
 import authorizedUserQuery from './queries/authorizedUser';
-import articlesQuery from './queries/articles';
+import lettersQuery from './queries/letters';
 import PageInfo from './types/PageInfo';
-import ArticleConnection from './types/ArticleConnection';
+import LetterConnection from './types/LetterConnection';
 import OrderDirection from './enums/OrderDirection';
 import createReviewMutation from './mutations/createReview';
 import Review from './types/Review';
@@ -34,17 +34,17 @@ const rootTypeDefs = gql`
 const typeDefs = [
   rootTypeDefs,
   DateTime.typeDefs,
-  Article.typeDefs,
-  articleQuery.typeDefs,
-  createArticleMutation.typeDefs,
+  Letter.typeDefs,
+  letterQuery.typeDefs,
+  createLetterMutation.typeDefs,
   User.typeDefs,
   createUserMutation.typeDefs,
   authorizeMutation.typeDefs,
   usersQuery.typeDefs,
   authorizedUserQuery.typeDefs,
-  articlesQuery.typeDefs,
+  lettersQuery.typeDefs,
   PageInfo.typeDefs,
-  ArticleConnection.typeDefs,
+  LetterConnection.typeDefs,
   OrderDirection.typeDefs,
   createReviewMutation.typeDefs,
   Review.typeDefs,
@@ -55,17 +55,17 @@ const typeDefs = [
 
 const resolvers = merge(
   DateTime.resolvers,
-  Article.resolvers,
-  articleQuery.resolvers,
-  createArticleMutation.resolvers,
+  Letter.resolvers,
+  letterQuery.resolvers,
+  createLetterMutation.resolvers,
   User.resolvers,
   createUserMutation.resolvers,
   authorizeMutation.resolvers,
   usersQuery.resolvers,
   authorizedUserQuery.resolvers,
-  articlesQuery.resolvers,
+  lettersQuery.resolvers,
   PageInfo.resolvers,
-  ArticleConnection.resolvers,
+  LetterConnection.resolvers,
   OrderDirection.resolvers,
   createReviewMutation.resolvers,
   Review.resolvers,

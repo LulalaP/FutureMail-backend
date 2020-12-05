@@ -4,9 +4,9 @@ export const typeDefs = gql`
   type Review {
     id: ID!
     user: User!
-    article: Article!
+    letter: Letter!
     userId: String!
-    articleId: String!
+    letterId: String!
     createdAt: DateTime!
     text: String
   }
@@ -16,11 +16,11 @@ export const resolvers = {
   Review: {
     user: async ({ userId }, args, { dataLoaders: { userLoader } }) =>
       userLoader.load(userId),
-    article: (
-      { articleId },
+    letter: (
+      { letterId },
       args,
-      { dataLoaders: { articleLoader } },
-    ) => articleLoader.load(articleId),
+      { dataLoaders: { letterLoader } },
+    ) => letterLoader.load(letterId),
   },
 };
 

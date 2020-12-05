@@ -4,7 +4,7 @@ import * as yup from 'yup';
 const { v4: uuid } = require('uuid');
 
 export const typeDefs = gql`
-  input CreateArticleInput {
+  input CreateLetterInput {
     title: String!
     titleEn: String!
     description: String!
@@ -13,13 +13,13 @@ export const typeDefs = gql`
 
   extend type Mutation {
     """
-    Create a new article.
+    Create a new letter.
     """
-    createArticle(article: CreateArticleInput): Article
+    createLetter(letter: CreateLetterInput): Letter
   }
 `;
 
-const createArticleInputSchema = yup.object().shape({
+const createLetterInputSchema = yup.object().shape({
   title: yup
     .string()
     .required()
@@ -42,15 +42,15 @@ const createArticleInputSchema = yup.object().shape({
 
 export const resolvers = {
   Mutation: {
-    createArticle: async (
+    createLetter: async (
       obj,
       args,
-      { models: { Article }, authService },
+      { models: { Letter }, authService },
     ) => {
       const userId = authService.assertIsAuthorized();
 
-      const normalizedArticle = await createArticleInputSchema.validate(
-        args.article,
+      const normalizedLetter = await createLetterInputSchema.validate(
+        args.letter,
         {
           stripUnknown: true,
         },
@@ -58,16 +58,16 @@ export const resolvers = {
 
       const id = uuid();
 
-      await Article.query().insert({
+      await Letter.query().insert({
         id,
         userId,
-        title: normalizedArticle.title,
-        titleEn: normalizedArticle.titleEn,
-        description: normalizedArticle.description,
-        text: normalizedArticle.text,
+        title: normalizedLetter.title,
+        titleEn: normalizedLetter.titleEn,
+        description: normalizedLetter.description,
+        text: normalizedLetter.text,
       });
 
-      return Article.query().findById(id);
+      return Letter.query().findById(id);
     },
   },
 };

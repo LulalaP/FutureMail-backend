@@ -7,14 +7,14 @@ exports.up = function (knex) {
       .references('users.id')
       .onDelete('cascade');
     table
-      .text('article_id')
-      .references('articles.id')
+      .text('letter_id')
+      .references('letters.id')
       .onDelete('cascade');
     table.text('text');
     table.timestamp('created_at');
     table.timestamp('updated_at');
 
-    table.index(['user_id', 'article_id']);
+    table.index(['user_id', 'letter_id']);
   });
 };
 

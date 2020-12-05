@@ -19,9 +19,9 @@ const createColumns = (titleZh, titleEn) => ({
 });
 
 exports.seed = async (knex) => {
-  await knex('articles').del();
+  await knex('letters').del();
 
-  await knex('articles').insert([
+  await knex('letters').insert([
     {
       description: 'A poet',
       text: loremIpsum,

@@ -1,6 +1,6 @@
 # How Why How Why Backend
 
-This is a GraphQL API for the How Why How Why application.
+This is a GraphQL API for the How Why How Why application. The relative React Native app is here: [how-why-how-why-app](https://github.com/LulalaP/how-why-how-why-app)
 
 ## ✔️ Requirements
 

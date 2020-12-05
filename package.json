@@ -1,5 +1,5 @@
 {
-  "name": "how-why-how-why-backend",
+  "name": "futuremail-backend",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -31,12 +31,12 @@
     "@babel/core": "^7.12.3",
     "@babel/preset-env": "^7.12.1",
     "babel-eslint": "^10.1.0",
-    "eslint": "^7.2.0",
+    "eslint": "^7.15.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.21.5",
-    "eslint-plugin-react-hooks": "^4.0.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
     "prettier": "^2.1.2"
   },
   "dependencies": {
@@ -50,8 +50,10 @@
     "dotenv": "^8.2.0",
     "es6-error": "^4.1.1",
     "esm": "^3.2.25",
-    "graphql": "^15.4.0",
+    "graphql": "^14.7.0",
     "graphql-iso-date": "^3.6.1",
+    "graphql-subscriptions": "^1.1.0",
+    "graphql-upload": "^11.0.0",
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.21.12",
     "koa": "^2.13.0",
@@ -70,11 +72,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lulalap/how-why-how-why-backend.git"
+    "url": "git+https://github.com/lulalap/futuremail-backend.git"
   },
   "bugs": {
-    "url": "https://github.com/lulalap/how-why-how-why-backend/issues"
+    "url": "https://github.com/lulalap/futuremail-backend/issues"
   },
-  "homepage": "https://github.com/lulalap/how-why-how-why-backend#readme",
+  "homepage": "https://github.com/lulalap/futuremail-backend#readme",
   "description": ""
 }
