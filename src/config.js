@@ -17,9 +17,4 @@ export default {
     },
     useNullAsDefault: true,
   },
-  github: {
-    apiUrl: process.env.GITHUB_API_URL,
-    clientId: process.env.GITHUB_CLIENT_ID,
-    clientSecret: process.env.GITHUB_CLIENT_SECRET,
-  },
 };
