@@ -1,6 +1,6 @@
 # How Why How Why Backend
 
-This is a GraphQL API for the How Why How Why application. The relative React Native app is here: [how-why-how-why-app](https://github.com/LulalaP/how-why-how-why-app)
+This is a GraphQL API for Future Mail application. The relative React web app is here: [FutureMail](https://github.com/LulalaP/FutureMail)
 
 ## ✔️ Requirements
 
@@ -8,15 +8,15 @@ Node (versions `12.X.X` are tested, but later versions _might_ work as well) and
 
 ## 🚀 Getting started
 
-1. Clone this repository and run `npm install` in the ``how-why-how-why-backend`` directory.
+1. Clone this repository and run `npm install` in the ``future-mail-backend`` directory.
 
-3. Create a file `.env` in the `how-why-how-why-backend` directory and copy the contents of the `.env.template` file there. 
+3. Create a file `.env` in the `future-mail-backend` directory and copy the contents of the `.env.template` file there. 
 
 4. Run `npm run build`. This will setup the SQLite database and run the migrations.
 
 5. **(Optional)** To populate the database with some seed data you can run `npm run seed:run`. **Note:** running this command will remove all existing data.
 
-6. All done! Just run `npm start` to start the server. After the server has started you should be able to access the GraphQL playground at http://localhost:5000/graphql.
+6. All done! Just run `npm start` to start the server. After the server has started you should be able to access the GraphQL playground at http://localhost:5001/graphql.
 
 ## 🔑 Authorization
 
@@ -79,6 +79,6 @@ Submit an issue with the bug description and a way to reproduce the bug. If you 
 
 ## ❓ FAQ
 
-- **How to reset the database?** If you are absolutely sure that you want to remove _all_ the existing data, just remove the `database.sqlite` file in the `how-why-how-why-backend` directory and run `npm run build`. You can run `npm run seed:run` to initialize the new database with seed data.
+- **How to reset the database?** If you are absolutely sure that you want to remove _all_ the existing data, just remove the `database.sqlite` file in the `future-mail-backend` directory and run `npm run build`. You can run `npm run seed:run` to initialize the new database with seed data.
 
 - **Is this production ready?** Almost. The current version of the API utilizes the SQLite database, which is not quite suitable for production. Luckily, all database queries are performed with [Objection](https://vincit.github.io/objection.js/) ORM, and changing the underlying database driver is just a matter of [configuration](http://knexjs.org/#Installation-client).
