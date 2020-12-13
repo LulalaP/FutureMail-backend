@@ -5,10 +5,12 @@ const { v4: uuid } = require('uuid');
 
 export const typeDefs = gql`
   input CreateLetterInput {
-    title: String!
-    titleEn: String!
-    description: String!
-    text: String!
+    title: String!,
+    text: String!,
+    sendTime: String!,
+    author: String!,
+    email: String!,
+    setPrivate: Boolean!
   }
 
   extend type Mutation {
@@ -23,16 +25,23 @@ const createLetterInputSchema = yup.object().shape({
   title: yup
     .string()
     .required()
+    .max(200)
     .trim(),
-  titleEn: yup
+  sendTime: yup
     .string()
     .required()
     .trim(),
-  description: yup
+  author: yup
     .string()
     .required()
-    .max(1000)
     .trim(),
+  email: yup
+    .string()
+    .required()
+    .trim(),
+  setPrivate: yup
+    .boolean()
+    .required(),
   text: yup
     .string()
     .max(5000)
@@ -62,9 +71,11 @@ export const resolvers = {
         id,
         userId,
         title: normalizedLetter.title,
-        titleEn: normalizedLetter.titleEn,
-        description: normalizedLetter.description,
         text: normalizedLetter.text,
+        sendTime: normalizedLetter.sendTime,
+        author: normalizedLetter.author,
+        email: normalizedLetter.email,
+        setPrivate: normalizedLetter.setPrivate,
       });
 
       return Letter.query().findById(id);

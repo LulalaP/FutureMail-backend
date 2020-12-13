@@ -7,13 +7,15 @@ exports.up = function (knex) {
       .references('users.id')
       .onDelete('cascade');
     table.text('title');
-    table.text('title_en');
-    table.text('description');
+    table.text('author');
+    table.text('email');
+    table.boolean('setPrivate').notNullable().defaultTo(false);
     table.text('text');
+    table.timestamp('sendTime');
     table.timestamp('created_at');
     table.timestamp('updated_at');
 
-    table.index(['title_en', 'user_id']);
+    table.index(['id', 'title', 'user_id']);
   });
 };
 

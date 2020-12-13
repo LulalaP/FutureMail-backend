@@ -1,4 +1,4 @@
-# How Why How Why Backend
+# Future Mail Backend
 
 This is a GraphQL API for Future Mail application. The relative React web app is here: [FutureMail](https://github.com/LulalaP/FutureMail)
 

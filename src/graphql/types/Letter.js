@@ -6,18 +6,18 @@ import createPaginationQuery from '../../utils/createPaginationQuery';
 export const typeDefs = gql`
   type Letter {
     id: ID!
-    title: String!
-    titleEn: String!
     userId: String!
     user: User!
     createdAt: DateTime!
     reviews(first: Int, after: String): ReviewConnection!
     reviewCount: Int
-    viewsCount: Int
     likesCount: Int
-    url: String
-    description: String!
-    text: String!
+    title: String!
+    text: String!,
+    sendTime: DateTime!,
+    author: String!,
+    email: String!,
+    setPrivate: Boolean!
   }
 `;
 

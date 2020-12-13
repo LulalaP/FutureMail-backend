@@ -10,6 +10,7 @@
     "migrate:latest": "knex migrate:latest",
     "initdatabase": "nodetouch database.sqlite",
     "build": "npm run initdatabase && npm run migrate:latest",
+    "build:ui": "rm -rf build && cd D:/Work/CS/GitHub/futuremail/futuremail-frontend && npm run build --prod && cp -r build D:/Work/CS/GitHub/futuremail/futuremail-backend",
     "seed:make": "knex seed:make",
     "seed:run": "knex seed:run"
   },
