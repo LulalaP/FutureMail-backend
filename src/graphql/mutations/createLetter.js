@@ -7,7 +7,7 @@ export const typeDefs = gql`
   input CreateLetterInput {
     title: String!,
     text: String!,
-    sendTime: String!,
+    sentAt: DateTime!,
     author: String!,
     email: String!,
     setPrivate: Boolean!
@@ -27,10 +27,9 @@ const createLetterInputSchema = yup.object().shape({
     .required()
     .max(200)
     .trim(),
-  sendTime: yup
-    .string()
-    .required()
-    .trim(),
+  sentAt: yup
+    .date()
+    .required(),
   author: yup
     .string()
     .required()
@@ -72,7 +71,7 @@ export const resolvers = {
         userId,
         title: normalizedLetter.title,
         text: normalizedLetter.text,
-        sendTime: normalizedLetter.sendTime,
+        sentAt: normalizedLetter.sentAt,
         author: normalizedLetter.author,
         email: normalizedLetter.email,
         setPrivate: normalizedLetter.setPrivate,

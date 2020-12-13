@@ -9,9 +9,9 @@ exports.up = function (knex) {
     table.text('title');
     table.text('author');
     table.text('email');
-    table.boolean('setPrivate').notNullable().defaultTo(false);
+    table.boolean('set_private').notNullable().defaultTo(false);
     table.text('text');
-    table.timestamp('sendTime');
+    table.timestamp('sent_at');
     table.timestamp('created_at');
     table.timestamp('updated_at');
 

@@ -14,7 +14,7 @@ export const typeDefs = gql`
     likesCount: Int
     title: String!
     text: String!,
-    sendTime: DateTime!,
+    sentAt: DateTime!,
     author: String!,
     email: String!,
     setPrivate: Boolean!
